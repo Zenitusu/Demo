@@ -1,0 +1,52 @@
+import requests 
+response = requests.get("http://quotes.toscrape.com/page/1/")
+
+if response.status_code == 200:
+    print("Got the access")
+
+# BeautifulSoup 
+from bs4 import BeautifulSoup
+with open ('dumb.html') as fp:
+    soup = BeautifulSoup(fp,'html.parser')
+    print("successful")
+ # to make it pretty
+#print(soup.prettify())
+# to access the title
+print(soup.title.string)
+# to access the para
+print(soup.p.string)
+# to call a element in a iteration 
+for a in soup.find_all('a'):
+    print(a.get('href'))
+# values in the para tag
+for text in soup.find_all('p'):
+    print(text.string)
+
+print(soup.get_text())
+
+# extracting the data from Div container
+from bs4 import BeautifulSoup
+
+with open('debi.html') as fp:
+    soup = BeautifulSoup(fp,'lxml')
+
+#to make it pretty 
+#print(soup.prettify())
+# to access a element in html 
+"""for text in soup.find_all('p'):
+    print(soup.p.string)"""
+
+"""Match = soup.find_all('div')
+print(Match)"""
+heading = soup.find('div',class_='article')
+
+Titlecard = heading.h2.a.string
+print(Titlecard)
+
+Summary = heading.p.string
+print(Summary)
+
+# to find the video src in a website
+#these article is a div container 
+vid_src = article.find_all('iframe',class_='youtube=player')
+print(vid_src)
